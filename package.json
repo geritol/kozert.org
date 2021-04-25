@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "db": "CONTAINER_NAME=kozert-db PORT=54320 ./scripts/start-db.sh",
     "type-check": "tsc --noEmit",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
@@ -13,9 +14,11 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@prisma/client": "^2.21.2",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "next": "10.1.3",
+    "next-auth": "^3.17.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
@@ -27,6 +30,7 @@
     "eslint-plugin-react": "^7.23.2",
     "postcss": "^8.2.12",
     "prettier": "^2.2.1",
+    "prisma": "^2.21.2",
     "tailwindcss": "^2.1.2",
     "typescript": "^4.2.4"
   }
