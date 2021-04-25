@@ -14,3 +14,7 @@ export const getProject = async (
   }
   return prisma.project.findUnique({ where: { id } });
 };
+
+export const getProjects = async (): Promise<Project[]> => {
+  return prisma.project.findMany({ take: 10 });
+};
