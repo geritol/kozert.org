@@ -1,7 +1,9 @@
+import { Project } from ".prisma/client";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
+import ProjectCard from "./ProjectCard";
 
-export default function Projects() {
+export default function Projects(props: { projects: Project[] }) {
   const [session] = useSession();
 
   return (
@@ -14,7 +16,13 @@ export default function Projects() {
           </Link>
         )}
       </div>
-      <p className="mt-8">No projects found :(</p>
+      {props.projects.length === 0 && (
+        <p className="mt-8">No projects found :(</p>
+      )}
+      <div className="flex mt-6">
+        {props.projects &&
+          props.projects.map((p) => <ProjectCard project={p} key={p.id} />)}
+      </div>
     </div>
   );
 }

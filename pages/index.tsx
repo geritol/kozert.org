@@ -1,8 +1,10 @@
 import Projects from "frontend/components/Projects";
 import SiteHead from "frontend/components/SiteHead";
 import Container from "frontend/components/Container";
+import { Project } from ".prisma/client";
+import { getProjects } from "backend/data/project";
 
-export default function Home() {
+export default function Home(props: { projects: Project[] }) {
   return (
     <Container>
       <SiteHead />
@@ -24,7 +26,15 @@ export default function Home() {
           </a>
         </p>
       </div>
-      <Projects />
+      <Projects projects={props.projects} />
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  const projects = await getProjects();
+  return {
+    props: { projects },
+    revalidate: 60,
+  };
 }
