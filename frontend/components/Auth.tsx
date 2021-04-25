@@ -10,7 +10,7 @@ export default function Auth() {
       {!session && (
         <>
           <button
-            className="border rounded-lg px-4 py-1 hover:border-blue-300"
+            className="border rounded-md px-4 py-1 hover:border-blue-300"
             onClick={() => signIn()}
           >
             Sign in
@@ -21,7 +21,7 @@ export default function Auth() {
         <div className="flex items-center">
           Signed in as {session.user.email} <br />
           <button
-            className="border rounded-lg px-4 py-1 hover:border-red-300 ml-2"
+            className="border rounded-md px-4 py-1 hover:border-red-300 ml-2"
             onClick={() => signOut()}
           >
             Sign out
