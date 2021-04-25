@@ -25,4 +25,9 @@ jobs:
       - run: npm run format
       - run: npm run lint
       - run: npm run db:integration
-      - run: bash ./scripts/coverage.sh
+      - run: npm run test:coverage
+      - name: Coveralls Unit
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: "./.jest/lcov.info"

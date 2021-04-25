@@ -1,10 +1,13 @@
 module.exports = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
-    "!**/*.int.test.{js,jsx,ts,tsx}",
+    "!**/*.test.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
+    "!*.{js,ts}",
     "!**/node_modules/**",
     "!<rootDir>/prisma/**",
+    "!<rootDir>/.next/**",
+    "!<rootDir>/.jest/**",
   ],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   transform: {
