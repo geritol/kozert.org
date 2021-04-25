@@ -1,7 +1,9 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function Auth() {
-  const [session] = useSession();
+  const [session, loading] = useSession();
+
+  if (loading) return <></>;
 
   return (
     <>
