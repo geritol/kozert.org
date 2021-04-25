@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, canary]
   pull_request:
-    branches: [main]
+    branches: [main, canary]
 
 jobs:
   test:
@@ -24,3 +24,5 @@ jobs:
       - run: npm run type-check
       - run: npm run format
       - run: npm run lint
+      - run: npm run db:integration
+      - run: bash ./scripts/coverage.sh
