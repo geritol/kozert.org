@@ -8,7 +8,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto text-center">
+      <main className="container mx-auto text-center my-2">
         <h1 className="text-4xl mt-24">Welcome to Közért!</h1>
         <p className="mt-8 text-lg">
           Közért is an open source online platform that helps NGOs <br /> to
