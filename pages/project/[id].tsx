@@ -3,6 +3,7 @@ import { getAllProjectIds, getProject } from "backend/data/project";
 import Container from "frontend/components/Container";
 import SiteHead from "frontend/components/SiteHead";
 import Image from "frontend/components/Image";
+import ReactMarkdown from "react-markdown";
 
 export default function ProjectView(props: { project: Project }) {
   return (
@@ -10,12 +11,27 @@ export default function ProjectView(props: { project: Project }) {
       <SiteHead />
       <div className="max-w-xl mx-auto">
         {props.project.image && (
-          <div style={{ height: "300px" }} className="relative overflow-hidden">
+          <div
+            style={{ height: "300px" }}
+            className="relative overflow-hidden mb-6"
+          >
             <Image src={props.project.image} objectFit="cover" layout="fill" />
           </div>
         )}
         <h1 className="text-3xl mb-6">{props.project.title}</h1>
-        <div>{props.project.description}</div>
+        <div className="space-y-4">
+          <ReactMarkdown
+            linkTarget="_blank"
+            components={{
+              h1: "h2",
+              h2: "h3",
+              h3: "h4",
+              h5: "h6",
+            }}
+          >
+            {props.project.description}
+          </ReactMarkdown>
+        </div>
       </div>
     </Container>
   );
