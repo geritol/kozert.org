@@ -1,8 +1,9 @@
 import Container from "frontend/components/Container";
+import FileUpload, { createEmptyValue } from "frontend/components/FileUpload";
 import SiteHead from "frontend/components/SiteHead";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { projectSchema, validateOne } from "shared/validations";
 
 export default function CreateProject() {
@@ -11,7 +12,10 @@ export default function CreateProject() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { title: "", description: "" } });
+    control,
+  } = useForm({
+    defaultValues: { title: "", description: "", image: createEmptyValue() },
+  });
 
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<{
@@ -27,7 +31,13 @@ export default function CreateProject() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        image:
+          typeof data.image === "string"
+            ? data.image
+            : (await data.image.upload())[0],
+      }),
     });
     const body = await response.json();
     setResult({ ok: response.ok, completed: true, body });
@@ -65,6 +75,19 @@ export default function CreateProject() {
           {errors.title && (
             <span className="text-red-500">{errors.title.message}</span>
           )}
+
+          <Controller
+            name="image"
+            control={control}
+            rules={{
+              validate: (value) => {
+                if (typeof value === "string") return true;
+                return value?.files?.length > 0 || "Please select an image";
+              },
+            }}
+            render={({ field }) => <FileUpload {...field} />}
+          />
+          {errors.image && <span className="text-red-500">{errors.image}</span>}
 
           <textarea
             className="rounded border px-3 py-2 mt-4"
