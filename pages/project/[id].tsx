@@ -4,8 +4,15 @@ import Container from "frontend/components/Container";
 import SiteHead from "frontend/components/SiteHead";
 import Image from "frontend/components/Image";
 import ReactMarkdown from "react-markdown";
+import { useRouter } from "next/dist/client/router";
 
 export default function ProjectView(props: { project: Project }) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Container>
       <SiteHead />
