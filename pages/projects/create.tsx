@@ -1,10 +1,12 @@
 import Container from "frontend/components/Container";
 import SiteHead from "frontend/components/SiteHead";
+import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { projectSchema, validateOne } from "shared/validations";
 
 export default function CreateProject() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -30,6 +32,9 @@ export default function CreateProject() {
     const body = await response.json();
     setResult({ ok: response.ok, completed: true, body });
     setIsLoading(false);
+    if (response.ok) {
+      router.push(`/project/${body.data.id}`);
+    }
   });
 
   return (
