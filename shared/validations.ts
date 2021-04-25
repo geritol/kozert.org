@@ -13,4 +13,5 @@ export const validateOne = (schema: yup.AnySchema, key: string) => (
 export const projectSchema = yup.object().shape({
   title: yup.string().required(),
   description: yup.string().required(),
+  image: yup.string().optional(),
 });
