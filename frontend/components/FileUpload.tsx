@@ -1,5 +1,12 @@
 import { PreviewFile, upload } from "frontend/upload";
-import { useCallback, useEffect, useState } from "react";
+import {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { useDropzone } from "react-dropzone";
 
 const megaByte = 1000 * 1000;
@@ -8,13 +15,16 @@ type value = string | { files: PreviewFile[]; upload: () => Promise<string[]> };
 
 export const createEmptyValue = () => "" as value;
 
-export default function FileUpload({
-  onChange,
-  value,
-}: {
-  onChange: (props: { files: PreviewFile[]; upload: typeof upload }) => void;
-  value?: value;
-}) {
+function FileUpload(
+  {
+    onChange,
+    value,
+  }: {
+    onChange: (props: { files: PreviewFile[]; upload: typeof upload }) => void;
+    value?: value;
+  },
+  ref: ForwardedRef<any>
+) {
   const [files, setFiles] = useState([] as PreviewFile[]);
   useEffect(() => {
     if (!value || typeof value !== "string") return;
@@ -37,6 +47,8 @@ export default function FileUpload({
     multiple: false,
     maxSize: 10 * megaByte,
   });
+
+  useImperativeHandle(ref, () => ({}));
 
   return (
     <div
@@ -61,3 +73,5 @@ export default function FileUpload({
     </div>
   );
 }
+
+export default forwardRef(FileUpload);
