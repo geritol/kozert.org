@@ -39,7 +39,7 @@ describe("create project", () => {
           email: `test@example.com`,
         },
       });
-      authMock.mockResolvedValue(user.email);
+      authMock.mockResolvedValue(user);
     });
     describe("when request is valid", () => {
       beforeEach(async () => {
