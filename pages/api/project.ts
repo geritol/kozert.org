@@ -25,7 +25,7 @@ const post: NextApiHandler = async (request, response) => {
       description,
       image: image && prefixedImageUrl(image),
       User: {
-        connect: { email: user },
+        connect: { email: user.email },
       },
     },
   });
