@@ -12,6 +12,11 @@ export default NextAuth({
       // maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
     }),
   ],
-
+  callbacks: {
+    session: async (session, user) => {
+      session.userId = user.id;
+      return Promise.resolve(session);
+    },
+  },
   adapter: Adapters.Prisma.Adapter({ prisma }),
 });
