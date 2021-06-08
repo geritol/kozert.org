@@ -15,3 +15,9 @@ export const projectSchema = yup.object().shape({
   description: yup.string().required(),
   image: yup.string().optional(),
 });
+
+export const userSchema = yup.object().shape({
+  name: yup.string().required(),
+  bio: yup.string().optional(),
+  image: yup.string().optional(),
+});
