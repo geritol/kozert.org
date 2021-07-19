@@ -36,7 +36,9 @@ export default function CreateProject() {
         image:
           typeof data.image === "string"
             ? data.image
-            : (await data.image.upload())[0],
+            : (
+                await data.image.upload()
+              )[0],
       }),
     });
     const body = await response.json();
