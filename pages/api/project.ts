@@ -9,11 +9,7 @@ import { projectSchema } from "shared/validations";
 const post: NextApiHandler = async (request, response) => {
   const user = await authenticate(request);
 
-  const {
-    title,
-    description,
-    image,
-  } = await projectSchema
+  const { title, description, image } = await projectSchema
     .validate(request.body, { abortEarly: false, stripUnknown: true })
     .catch((error) => {
       throw new ValidationError(error.errors);

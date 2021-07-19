@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import "setimmediate"; // prisma needs setImmediate global, which is not present in jsdom test env
 import { prisma } from "backend/db";
 import execa from "execa";
 import fetchMock from "jest-fetch-mock";

@@ -10,9 +10,14 @@ const removeCloudinaryPrefix = (image: string): string => {
   return image.replace(deliveryUrl, "");
 };
 
-export default function Image(props: React.ComponentProps<typeof NextImage>) {
-  if (isCloudinaryImage(props.src))
-    return <NextImage {...props} src={removeCloudinaryPrefix(props.src)} />;
+export default function Image(
+  props: React.ComponentProps<typeof NextImage> & { src: string }
+) {
+  if (isCloudinaryImage(props.src)) {
+    return (
+      <NextImage {...props} src={removeCloudinaryPrefix(props.src) as any} />
+    );
+  }
   return (
     <img
       src={props.src}

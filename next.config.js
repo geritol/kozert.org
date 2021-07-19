@@ -1,6 +1,6 @@
 module.exports = {
-  future: {
-    webpack5: true,
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   images: {
     loader: "cloudinary",
