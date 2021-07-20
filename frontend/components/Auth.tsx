@@ -20,8 +20,10 @@ export default function Auth() {
       )}
       {session && (
         <div className="flex items-center">
-          Signed in as{" "}
-          <Link href={`/user/${session.userId}`}>{session.user.email}</Link>{" "}
+          Signed in as&nbsp;
+          <Link href={`/user/${session.userId}`}>
+            {session.user.email}
+          </Link>{" "}
           <br />
           <button
             className="border rounded-md px-4 py-1 hover:border-red-300 ml-2"
