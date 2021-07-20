@@ -5,6 +5,9 @@ import Adapters from "next-auth/adapters";
 import { prisma } from "backend/db";
 
 export default NextAuth({
+  pages: {
+    signIn: "/auth/signin",
+  },
   providers: [
     Providers.Email({
       server: EMAIL_SERVER,
