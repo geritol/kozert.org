@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/dist/client/router";
 import { getAllUserIds, getUser } from "backend/data/user";
 import { ReactNode } from "react";
+import { useSession } from "next-auth/client";
 
 const UserWrapper = (props: { children: ReactNode }) => (
   <Container>
@@ -16,12 +17,20 @@ const UserWrapper = (props: { children: ReactNode }) => (
 
 export default function UserView(props: { user: User }) {
   const router = useRouter();
+  const [session] = useSession();
 
   if (router.isFallback) {
     return <UserWrapper>Loading...</UserWrapper>;
   }
 
   if (!props.user.name) {
+    if (session && session.userId === props.user.id) {
+      return (
+        <UserWrapper>
+          <p className="text-center">You have not completed your profile yet</p>
+        </UserWrapper>
+      );
+    }
     return (
       <UserWrapper>
         <p className="text-center">User has not completed their profile yet</p>
