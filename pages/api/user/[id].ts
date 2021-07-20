@@ -31,7 +31,7 @@ const put: NextApiHandler = async (request, response) => {
     },
   });
 
-  response.status(200).end();
+  response.status(200).json({});
 };
 
 export default httpMethodSwitch({ put });

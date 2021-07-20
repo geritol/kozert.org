@@ -7,6 +7,7 @@ import { useRouter } from "next/dist/client/router";
 import { getAllUserIds, getUser } from "backend/data/user";
 import { ReactNode } from "react";
 import { useSession } from "next-auth/client";
+import Link from "next/link";
 
 const UserWrapper = (props: { children: ReactNode }) => (
   <Container>
@@ -23,11 +24,14 @@ export default function UserView(props: { user: User }) {
     return <UserWrapper>Loading...</UserWrapper>;
   }
 
+  const isOwnProfile = session && session.userId === props.user.id;
+
   if (!props.user.name) {
-    if (session && session.userId === props.user.id) {
+    if (isOwnProfile) {
       return (
         <UserWrapper>
           <p className="text-center">You have not completed your profile yet</p>
+          <Link href="/user/edit">Edit</Link>
         </UserWrapper>
       );
     }
@@ -48,7 +52,11 @@ export default function UserView(props: { user: User }) {
           <Image src={props.user.image} objectFit="cover" layout="fill" />
         </div>
       )}
-      <h1 className="text-3xl mb-6">{props.user.name}</h1>
+
+      <div className="flex justify-between mb-6">
+        <h1 className="text-3xl ">{props.user.name}</h1>
+        {isOwnProfile && <Link href="/user/edit">Edit</Link>}
+      </div>
       <div className="space-y-4">
         <ReactMarkdown
           linkTarget="_blank"

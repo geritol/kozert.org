@@ -13,7 +13,7 @@ const megaByte = 1000 * 1000;
 
 type value = string | { files: PreviewFile[]; upload: () => Promise<string[]> };
 
-export const createEmptyValue = () => "" as value;
+export const createValue = (image = "") => image as value;
 
 function FileUpload(
   {
